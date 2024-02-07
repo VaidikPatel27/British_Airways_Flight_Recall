@@ -11,7 +11,7 @@ from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import OrdinalEncoder, StandardScaler
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from imblearn.over_sampling import RandomOverSampler
 from xgboost import XGBClassifier as xgb
 from sklearn.metrics import f1_score, precision_score, recall_score
@@ -79,7 +79,12 @@ xg.fit(X_train, y_train)
 
 y_pred = xg.predict(X_test)
 
-print(f1_score(y_pred, y_test))
-print(recall_score(y_pred, y_test))
-print(precision_score(y_pred, y_test))
+print(f'f2 score: {f1_score(y_pred, y_test)}')
+print(f'recall score: {recall_score(y_pred, y_test)}')
+print(f'precision score: {precision_score(y_pred, y_test)}')
 
+cross_score = cross_val_score(xg, 
+                              X_train, y_train,
+                              cv = 10)
+print(f'cross validation score: {cross_score}')
+print(f'minimum cross validation score: {cross_score.min()}')
