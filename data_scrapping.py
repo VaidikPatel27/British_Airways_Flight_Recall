@@ -12,7 +12,7 @@ ratings = []
 traveller_type = []
 seat_type = []
 route = []
-for i in range(1,50):
+for i in range(1,100):
   print(f'Initializing page:{i} ---->')
   url = f'https://www.airlinequality.com/airline-reviews/british-airways/page/{i}/?sortby=post_date%3ADesc&pagesize=100'
   req = requests.get(url)
